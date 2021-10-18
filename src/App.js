@@ -21,7 +21,7 @@ var options = {
 
 function App() {
   const [movieArray, setMovieArray] = useState("");
-  const [movies, setMovies] = useState([{name: "Testmovie"}, {name: "Testmovie"}, {name: "Testmovie"}, {name: "Testmovie"}]);
+  const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
 
 
