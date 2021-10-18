@@ -23,6 +23,7 @@ function App() {
   const [movieArray, setMovieArray] = useState("");
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrormessage] = useState("");
 
 
   const submitMovies = (e) => {
@@ -38,8 +39,11 @@ function App() {
           console.log(res.data.d[0].id)
           moviesArray.push({ "name": moviesSplit[i], "id": res.data.d[0].id });
         }).catch(error => {
-          let a = error.message;
-          console.log(a.replace("undefined", moviesSplit[i]))
+          
+          setErrormessage(`Cannot find movies with the name ${moviesSplit[i]}`);
+          setTimeout(() => {
+            setErrormessage("");
+          }, 5000);
 
         }))
     }
@@ -73,7 +77,7 @@ function App() {
           <div className="submit-button"><input type="submit" value="Submit" /></div>
         </form>
       </div>
-      <div class={loading ? "loader" : ""}></div>
+      <div class={loading ? "loader" : "errorMessage"}><p>{errorMessage}</p></div>
       <div className="movielist-container">
         {movies.map(movie => {
           return <MovieInfo movie={movie} />
